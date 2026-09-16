@@ -1,2 +1,8 @@
 #Fichier d'envrionnement. virtuel
 .venv/
+
+#Fichier système Mac
+.DS_Store
+
+#Ne pas commit les données
+data/
