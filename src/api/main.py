@@ -55,7 +55,7 @@ def recommended_crop(data:CropRecommendedData):
     result = make_prediction(data=data, recommendation=True)
 
     if "error" in result:
-        return HTTPException(status_code=500, detail=result["error"])
+        raise HTTPException(status_code=500, detail=result["error"])
 
     return result
 
