@@ -25,7 +25,7 @@ def load_regressor():
 REGRESSOR = load_regressor()
 
 
-def make_prediction(data: dict) -> dict:
+def make_prediction(data: dict, recommendation=False) -> dict:
     """
         Fonction permettant de faire une prédiction à partir des données envoyées par l'utilisateur
         
@@ -44,13 +44,28 @@ def make_prediction(data: dict) -> dict:
 
     try:
         #Prétraitement
-        input_data = pd.DataFrame([data])
+        input_data = pd.DataFrame(data)
         yield_tons_per_hectare_pred = REGRESSOR.predict(input_data)
-        yield_tons_per_hectare_pred = float(yield_tons_per_hectare_pred[0])
-        return {
-            "yield_tons_per_hectare_pred": yield_tons_per_hectare_pred,
-            "input": data
-        }
+
+        #Pour une prédiction simple
+        if not recommendation:
+
+            yield_tons_per_hectare_pred = float(yield_tons_per_hectare_pred[0])
+            return {
+                "yield_tons_per_hectare_pred": yield_tons_per_hectare_pred,
+                "input": data
+            }
+
+        #Pour une recommendation de culture
+        else:
+
+            predicted_data = input_data.copy()
+            predicted_data["predicted_yield"] = yield_tons_per_hectare_pred
+            
+            return{
+                "recommended_crop_data": predicted_data.iloc[predicted_data["predicted_yield"].idxmax()].to_dict(),
+                "predicted_data": predicted_data.to_dict(orient="records"),
+            }        
 
     except Exception as e:
         return {

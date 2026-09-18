@@ -43,3 +43,14 @@ class CropData(BaseModel):
     Weather_Condition: WeatherCondition
     Days_to_Harvest: int
     pesticides_tonnes_mean: float
+
+class CropRecommendedData(BaseModel):
+    Region: Region
+    Soil_Type: SoilType
+    Rainfall_mm: float
+    Temperature_Celsius: float
+    Fertilizer_Used: bool
+    Irrigation_Used: bool
+    Weather_Condition: WeatherCondition
+    Days_to_Harvest: int
+    pesticides_tonnes_mean: float
