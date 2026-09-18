@@ -22,7 +22,7 @@ def home():
         "message": "Agritech - Recommender ML API running"
     }
 
-@app.post("/predict-yield", tags=["Yield per tonne"])
+@app.post("/predict", tags=["Yield per tonne"])
 def predict_yield(data:CropData):
     """
         Endpoint qui prédit le rendemment d'un culture en fonction des paramètres qui lui sont fournis
@@ -37,7 +37,7 @@ def predict_yield(data:CropData):
     return result
 
 
-@app.post("/recommended-crop", tags=["Crop Recommendation"])
+@app.post("/recommend", tags=["Crop Recommendation"])
 def recommended_crop(data:CropRecommendedData):
     """
         Endpoint qui prédit la meilleure(recommendation) culture à faire pour un haut rendement en fonction des conditions d'une parcelle
