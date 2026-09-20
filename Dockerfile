@@ -10,4 +10,6 @@ COPY src ./src
 
 COPY models ./models
 
-CMD ["uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+COPY createdb.py .
+
+CMD ["sh", "-c", "python createdb.py && uvicorn src.api.main:app --host 0.0.0.0 --port 8000"]

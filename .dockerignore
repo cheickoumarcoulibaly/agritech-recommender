@@ -1,15 +1,29 @@
+#Environnement virtuel
 .venv/
+
+#Git
 .git/
 .gitignore
 
+#Python
 __pycache__/
-*.pyc
+*.py[cod]
 
+#Jupyter
 .ipynb_checkpoints/
-
 notebooks/
+
+#Données brutes / datasets
 data/
 
+#Base de données locale
+src/data/*.db
+
+#MLflow
 mlflow.db
 
+#Logs
+logs/
+
+#Fichiers d'évaluation
 auto-eval.pdf
