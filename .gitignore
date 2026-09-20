@@ -1,12 +1,20 @@
-#Fichier d'envrionnement. virtuel
+# Environnement virtuel
 .venv/
 
-#Fichier système Mac
+# Fichiers système Mac
 .DS_Store
 
-#Ne pas commit les données
+# Fichiers Python générés
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Données
 data/
 
-#Fiche d'auto évaluation
+# Fiche d'auto-évaluation
 auto-eval.pdf
 
+/logs
+.coverage
+htmlcov/

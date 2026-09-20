@@ -1,0 +1,15 @@
+.venv/
+.git/
+.gitignore
+
+__pycache__/
+*.pyc
+
+.ipynb_checkpoints/
+
+notebooks/
+data/
+
+mlflow.db
+
+auto-eval.pdf
