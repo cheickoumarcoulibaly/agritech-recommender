@@ -1,7 +1,10 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends
 from src.processing.services import make_prediction
 from src.processing.schemas import CropData, CropRecommendedData, Crop
 from src.core.logging import logger
+from src.core.database import get_db
+from sqlalchemy.orm import Session
+from src.models.prediction import Prediction
 
 
 #Configuration globale: format de l'heure, le niveau d'alerte et le message
@@ -31,7 +34,7 @@ def home():
     }
 
 @app.post("/predict", tags=["Yield per tonne"])
-def predict_yield(data:CropData):
+def predict_yield(data:CropData, db: Session = Depends(get_db)):
     """
         Endpoint qui prédit le rendemment d'un culture en fonction des paramètres qui lui sont fournis
     """
@@ -43,6 +46,26 @@ def predict_yield(data:CropData):
 
     if "error" in result:
         raise HTTPException(status_code=500, detail=result["error"])
+
+    #données à insérer
+    prediction = Prediction(
+        Region=data.Region.value,
+        Soil_Type=data.Soil_Type.value,
+        Crop=data.Crop.value,
+        Rainfall_mm=data.Rainfall_mm,
+        Temperature_Celsius=data.Temperature_Celsius,
+        Fertilizer_Used=data.Fertilizer_Used,
+        Irrigation_Used=data.Irrigation_Used,
+        Weather_Condition=data.Weather_Condition.value,
+        Days_to_Harvest=data.Days_to_Harvest,
+        pesticides_tonnes_mean=data.pesticides_tonnes_mean,
+        predicted_yield=result["yield_tons_per_hectare_pred"]
+    )
+    #ajout à la session
+    db.add(prediction)
+    #valider la transaction
+    db.commit()
+    db.refresh(prediction)
 
     return result
 
