@@ -1,7 +1,15 @@
 from fastapi import FastAPI, HTTPException
 from src.processing.services import make_prediction
 from src.processing.schemas import CropData, CropRecommendedData, Crop
+from src.core.logging import logger
 
+
+#Configuration globale: format de l'heure, le niveau d'alerte et le message
+# logging.basicConfig(
+#     level=logging.INFO,
+#     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+# )
+# logger = logging.getLogger(__name__) #logger spécifique au fichier
 
 #Initialisation de l"API
 app = FastAPI(
@@ -28,6 +36,8 @@ def predict_yield(data:CropData):
         Endpoint qui prédit le rendemment d'un culture en fonction des paramètres qui lui sont fournis
     """
 
+    logger.info("Reçu une demande de prédiction simple pour la culture : %s", data.Crop.value)
+
     #Appel au pipeline chargé
     result = make_prediction([data.model_dump()])
 
@@ -43,6 +53,8 @@ def recommended_crop(data:CropRecommendedData):
         Endpoint qui prédit la meilleure(recommendation) culture à faire pour un haut rendement en fonction des conditions d'une parcelle
     """
 
+    logger.info("Reçu une demande de recommandation de culture.")
+
     data_sended = data.model_dump()
     data = []
 
@@ -57,6 +69,7 @@ def recommended_crop(data:CropRecommendedData):
     if "error" in result:
         raise HTTPException(status_code=500, detail=result["error"])
 
+    logger.info("🏆 Culture recommandée : %s", result["recommended_crop_data"]["Crop"])
     return result
 
     

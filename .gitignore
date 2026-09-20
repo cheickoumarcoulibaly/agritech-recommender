@@ -14,3 +14,7 @@ data/
 
 # Fiche d'auto-évaluation
 auto-eval.pdf
+
+/logs
+.coverage
+htmlcov/
