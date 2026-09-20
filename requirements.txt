@@ -8,3 +8,6 @@ xgboost
 pydantic
 fastapi
 uvicorn
+httpx2
+pytest
+pytest-cov
