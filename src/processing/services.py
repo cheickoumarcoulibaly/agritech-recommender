@@ -2,6 +2,7 @@ import joblib
 import pandas as pd
 import os
 from src.core.logging import logger
+from src.core.config import settings
 
 
 # #Configuration globale: format de l'heure, le niveau d'alerte et le message
@@ -11,7 +12,7 @@ from src.core.logging import logger
 # )
 # logger = logging.getLogger(__name__) #logger spécifique au fichier
 
-REGRESSOR_PATH = os.path.join(os.path.dirname(__file__), "../..", "models", "best_xgb_pipeline.pkl")
+REGRESSOR_PATH = settings.model_path
 
 """
     Script servant à charger le modèle de régression et de faire une prédiction

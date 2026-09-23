@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import pandas as pd
+from src.core.config import settings
 
 #Configuration de la page
 st.set_page_config(
@@ -10,7 +11,7 @@ st.set_page_config(
 )
 
 #URL de l'API FastAPI (par défaut sur le port 8000)
-API_URL = "http://127.0.0.1:8000"
+API_URL = settings.api_url
 
 #En-tête
 st.title("🌾 Agritech Answers : Assistant Agricole IA")

@@ -18,3 +18,9 @@ auto-eval.pdf
 /logs
 .coverage
 htmlcov/
+
+# Fichiers VSCode
+.vscode/
+
+#fichier d'Environnement
+.env

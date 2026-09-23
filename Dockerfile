@@ -12,4 +12,6 @@ COPY models ./models
 
 COPY createdb.py .
 
+EXPOSE 8000
+
 CMD ["sh", "-c", "python createdb.py && uvicorn src.api.main:app --host 0.0.0.0 --port 8000"]

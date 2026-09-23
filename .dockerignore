@@ -27,3 +27,6 @@ logs/
 
 #Fichiers d'évaluation
 auto-eval.pdf
+
+.env
+.env.example
