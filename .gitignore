@@ -29,3 +29,6 @@ htmlcov/
 mlflow.db
 mlruns/
 mlartifacts/
+
+# Guide local de préparation à la soutenance
+GUIDE_SOUTENANCE.md
