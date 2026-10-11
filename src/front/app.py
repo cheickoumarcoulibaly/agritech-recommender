@@ -69,7 +69,7 @@ with tab1:
                 if response.status_code == 200:
                     result = response.json()
                     yield_pred = result.get("yield_tons_per_hectare_pred", 0)
-                    st.success(f"###Rendement estimé : **{yield_pred:.2f}** tonnes/hectare")
+                    st.success(f"### Rendement estimé : **{yield_pred:.2f}** tonnes/hectare")
                 else:
                     st.error(f"Erreur de l'API ({response.status_code}) : Veuillez vérifier que les données sont correctes.")
             except requests.exceptions.ConnectionError:

@@ -24,3 +24,8 @@ htmlcov/
 
 #fichier d'Environnement
 .env
+
+# Suivi local des expériences MLflow
+mlflow.db
+mlruns/
+mlartifacts/

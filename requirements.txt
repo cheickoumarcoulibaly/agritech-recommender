@@ -13,3 +13,5 @@ pytest
 pytest-cov
 sqlalchemy
 pydantic-settings
+streamlit
+requests
